@@ -30,9 +30,13 @@ export const getOrders = async (
 
         const filters: FilterQuery<Partial<IOrder>> = {}
 
-        if (status && typeof status === 'string') {
-            filters.status = status
+       if (status) {
+        if (typeof status !== 'string') {
+            return next(new BadRequestError('Неверный формат статуса'));
         }
+        
+        filters.status = status;
+    }
 
         if (totalAmountFrom) {
             filters.totalAmount = { ...filters.totalAmount, $gte: Number(totalAmountFrom) }

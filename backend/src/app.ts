@@ -21,11 +21,10 @@ app.use(helmet({
 }))
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, 
-    max: 100, 
-    standardHeaders: true,
-    legacyHeaders: false,
+    windowMs: 15 * 60 * 1000,
+    max: 50,
 })
+
 app.use(limiter)
 
 app.use(cors({
